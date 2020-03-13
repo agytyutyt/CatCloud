@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include_once("utils/common_utils.php");
+include_once("utils/commonUtils.php");
 session_start();
 
 error_log("This is index_test.php");
