@@ -15,17 +15,21 @@ function parseUrl($url){
         "argus"=>""
     );
 
-    $c=0;
-    while($c!==false) {
-        $c = myUrlFindNext($url, $c);
-        if ($url[$c] == "?") {
-            $argus = parseArugs($url, $c);
+    reset($result);
+    for($pos=myUrlFindNext($url, 0) ; $pos!==false ; ) {
+        $start=$pos;
+        $pos = myUrlFindNext($url, $start+1);
+        if($pos===false) break;
+        else {
+            $result[key($result)]=substr($url,$start+1,$pos-$start-1);
+            next($result);
+        }
+        if ($url[$pos] == "?") {
+            $argus = parseArugs($url, $pos);
             $result["argus"] = $argus;
             break;
         }
-        $c++;
     }
-
     print_r($result);
     return $result;
 }
@@ -75,9 +79,9 @@ function myNoticeHandler($type, $message, $file, $line){
 }
 
 function myUrlFindNext($str,$start=0){
-    $c=count($str);
+    $c=strlen($str);
     for($i=$start;$i<$c;$i++){
-        if($str[$i]=="/" || $str[$i]=="?"){
+        if($str[$i]==="/" || $str[$i]==="?"){
             return $i;
         }
     }
