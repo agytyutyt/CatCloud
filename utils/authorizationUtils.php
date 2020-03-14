@@ -7,11 +7,11 @@
 function dispatchFilter($controller){
     switch ($controller){
         case "login":
-            echo "login";
+            echo "dispatchFilter(): login".nLine;
             return false;
             break;
         case "help":
-            echo "help";
+            echo "dispatchFilter(): help".nLine;
             return false;
             break;
         default:

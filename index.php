@@ -1,14 +1,16 @@
 <?php
 ob_start();
 session_start();
+include_once("config/config.php");
+include ("app/Application.php");
+$app = new Application();
+$app->run();
 
-include_once("utils/requestUtils.php");
+//if(dispatchFilter($urlResult["basename"])){
+//    echo "请登录";
+//}
+//else{
+//    echo"无需登录";
+//    include("statis/demo.html");
+//}
 
-$url=$_SERVER['REQUEST_URI'];
-$arr=pathinfo($url);
-print_r($arr);
-echo "<br>";
-echo $url;
-echo "<br>";
-$temp=parseUrl($url);
-//print_r($temp);
