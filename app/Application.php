@@ -1,13 +1,19 @@
 <?php
 
 include("controller/loginController.class.php");
+
 class Application{
     public function run(){
+        $result=null;
         $urlResult=parseUrl($_SERVER['REQUEST_URI']);
-        $target=$urlResult["basename"];
-        switch ($target){
+        $controller=$urlResult["controllerName"];
+        $method=$urlResult["methodName"];
+        switch ($controller){
             case "login":
-                echo "login";
+                $class=new ReflectionClass($controller."Controller");
+                $instance= $class->newInstance();
+                if ($method=="") $method="display";
+                $result=$instance->$method();
                 break;
             case "desktop":
                 echo "desktop";

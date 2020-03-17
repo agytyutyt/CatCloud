@@ -14,12 +14,14 @@ function parseUrl($url){
         "methodName"=>"",
         "argus"=>""
     );
-
     reset($result);
     for($pos=myUrlFindNext($url, 0) ; $pos!==false ; ) {
         $start=$pos;
         $pos = myUrlFindNext($url, $start+1);
-        if($pos===false) break;
+        if($pos==false) {
+            $result[key($result)]=substr($url,$start+1);
+            break;
+        }
         else {
             $result[key($result)]=substr($url,$start+1,$pos-$start-1);
             next($result);
@@ -30,7 +32,6 @@ function parseUrl($url){
             break;
         }
     }
-    print_r($result);
     return $result;
 }
 
