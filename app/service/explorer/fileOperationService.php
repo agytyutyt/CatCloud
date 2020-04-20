@@ -71,4 +71,9 @@ class fileOperationService{
         $stm=Command::chmod($file,$dir,$pri);
         return Command::sudo($stm);
     }
+
+    public function cpyFileTo($from, $to){
+        $stm=Command::cp($from,$to);
+        return Command::sudo($stm);
+    }
 }

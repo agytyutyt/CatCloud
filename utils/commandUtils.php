@@ -59,4 +59,8 @@ class Command{
         $target=$dir."/".$name;
         return "chmod -R $pri $target";
     }
+
+    static public function cp($from, $to){
+        return "cp -R $from $to";
+    }
 }

@@ -22,7 +22,6 @@ class explorerService {
                 if($file!="."&&$file!="..") {
                     array_push($result,$temp);
                 }
-//                echo "filename:" . $file . "<br>";
             }
             closedir($dh);
         }
@@ -43,4 +42,5 @@ class explorerService {
         error_log("explorerService===========".$result["msg"]);
         return $result;
     }
+
 }

@@ -124,6 +124,17 @@ class explorerController{
         echo json_encode(array("badge"=>$badge));
 //        print_r($_SESSION);
     }
+
+    function copyFile(){
+        $from=$_POST["from"];
+        $to=$_POST["to"];
+
+        $execResult=$this->fileOperationService->cpyFileTo($from,$to);
+        $return=array();
+        $return["code"]=$execResult["staCode"];
+        $return["msg"]=$execResult["output"];
+        echo json_encode($return);
+    }
 }
 
 
