@@ -63,4 +63,8 @@ class Command{
     static public function cp($from, $to){
         return "cp -R $from $to";
     }
+
+    static public function mv($from, $to){
+        return "mv $from $to";
+    }
 }

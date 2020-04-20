@@ -76,4 +76,9 @@ class fileOperationService{
         $stm=Command::cp($from,$to);
         return Command::sudo($stm);
     }
+
+    public function mvFileTo($from, $to){
+        $stm=Command::mv($from,$to);
+        return Command::sudo($stm);
+    }
 }

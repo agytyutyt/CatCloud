@@ -135,6 +135,17 @@ class explorerController{
         $return["msg"]=$execResult["output"];
         echo json_encode($return);
     }
+
+    function moveFile(){
+        $from=$_POST["from"];
+        $to=$_POST["to"];
+
+        $execResult=$this->fileOperationService->mvFileTo($from,$to);
+        $return=array();
+        $return["code"]=$execResult["staCode"];
+        $return["msg"]=$execResult["output"];
+        echo json_encode($return);
+    }
 }
 
 
