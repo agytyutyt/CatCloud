@@ -67,4 +67,8 @@ class Command{
     static public function mv($from, $to){
         return "mv $from $to";
     }
+
+    static public function find($file,$path){
+        return "find $path -name $file";
+    }
 }

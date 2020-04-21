@@ -53,4 +53,8 @@ class explorerService {
         return $result;
     }
 
+    public function findFile($file,$path){
+        $stm=Command::find($file,$path);
+        return Command::sudo($stm);
+    }
 }

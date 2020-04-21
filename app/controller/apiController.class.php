@@ -4,6 +4,11 @@ include_once ("./app/service/explorer/explorerService.php");
 
 class apiController{
 
+    private $explorerService;
+    function __construct(){
+        $this->explorerService=new explorerService();
+    }
+
     public function download(){
         $filePath=$_GET["file"];
         $name=substr($filePath,strrpos($filePath,"/")+1);
@@ -71,5 +76,13 @@ class apiController{
     public function getHomePath(){
         $user="drcat";
         echo json_encode(array("dir"=>"/home/drcat"));
+    }
+
+    public function searchFile(){
+        $file=$_POST["file"];
+        $path=$_POST["path"];
+
+        $result=$this->explorerService->findFile($file,$path);
+        echo json_encode($result);
     }
 }
