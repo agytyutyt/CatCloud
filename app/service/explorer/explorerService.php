@@ -1,6 +1,7 @@
 <?php
 
 include_once ("./app/bean/File.class.php");
+include_once ("./utils/commonUtils.php");
 
 
 
@@ -18,7 +19,16 @@ class explorerService {
         $result=array();
         if ($dh = opendir($dirName)){
             while (($file = readdir($dh)) !== false){
-                $temp=array("name"=>$file,"isDir"=>!is_file($dirName."/".$file));
+                $temp=array(
+                    "name"=>$file,
+                    "isDir"=>!is_file($dirName."/".$file),
+                    "mdfTime"=>filemtime($dirName."/".$file),
+                    "type"=>filetype($dirName."/".$file)
+                );
+                if($temp["isDir"]==true) $temp["size"]=false;
+                else{
+                    $temp["size"]=formatSize(filesize($dirName."/".$file));
+                }
                 if($file!="."&&$file!="..") {
                     array_push($result,$temp);
                 }

@@ -67,4 +67,9 @@ class apiController{
         sort($dir);
         echo json_encode($dir);
     }
+
+    public function getHomePath(){
+        $user="drcat";
+        echo json_encode(array("dir"=>"/home/drcat"));
+    }
 }
