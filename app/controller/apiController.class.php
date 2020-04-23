@@ -1,12 +1,15 @@
 <?php
 
 include_once ("./app/service/explorer/explorerService.php");
+include_once("./app/service/system/systemService.php");
 
 class apiController{
 
     private $explorerService;
+    private $systemService;
     function __construct(){
         $this->explorerService=new explorerService();
+        $this->systemService=new systemService();
     }
 
     public function download(){
@@ -84,5 +87,31 @@ class apiController{
 
         $result=$this->explorerService->findFile($file,$path);
         echo json_encode($result);
+    }
+
+    public function checkLogin(){
+        $result=array();
+        $result["user"]=$_SESSION["user"];
+        if($result["user"]){
+            $result["code"]=0;
+        }
+        else{
+            $result["code"]=-1;
+        }
+        echo json_encode($result);
+    }
+
+    public function getDiskInfo(){
+        try {
+            $disks=$this->systemService->diskInfo();
+            $result=array();
+            $result["staCode"]=0;
+            $result["disks"]=$disks;
+            echo json_encode($result);
+        }catch (Exception $exception){
+            $result=array("staCode"=>-1);
+            echo json_encode($result);
+        }
+
     }
 }

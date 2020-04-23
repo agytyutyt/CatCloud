@@ -35,4 +35,5 @@
    | `255*`           | Exit status out of range                                     | exit -1                       | **exit** takes only integer args in the range 0 - 255        |
 
    
-
+3. 验证用户密码核心文件：auth.c
+ [参考](https://blog.csdn.net/chenjifeng1987/article/details/80290895)
