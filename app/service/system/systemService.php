@@ -1,6 +1,7 @@
 <?php
 
 include_once "./utils/commandUtils.php";
+include_once "./utils/authorizationUtils.php";
 
 class systemService{
     public function diskInfo(){
@@ -25,6 +26,21 @@ class systemService{
             $disk["mountPoint"]=strtok(" ");
             $disk["usedPercent"]=strtok($disk["usedPercent"],"%");
             array_push($result,$disk);
+        }
+        return $result;
+    }
+
+    public function getHomeDir($user){
+        $dirResult=getHomeDirByUser($user);
+        $result=array();
+        error_log($dirResult);
+        if($dirResult!=""){
+            $result["exist"]=true;
+            $result["home"]=$dirResult;
+        }
+        else{
+            $result["exist"]=false;
+            $result["home"]="";
         }
         return $result;
     }

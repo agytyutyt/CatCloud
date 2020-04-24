@@ -33,7 +33,7 @@ function getAllUser(){
     return $result;
 }
 
-function getHomeDir($user){
+function getHomeDirByUser($user){
     $users=getAllUser();
     $result="";
     for($i=0;$i<count($users);$i++){

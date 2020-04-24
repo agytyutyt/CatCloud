@@ -80,8 +80,8 @@ class apiController{
     }
 
     public function getHomePath(){
-        $user="drcat";
-        echo json_encode(array("dir"=>"/home/drcat"));
+        $user=$_POST["user"];
+        echo json_encode($this->systemService->getHomeDir($user));
     }
 
     public function searchFile(){

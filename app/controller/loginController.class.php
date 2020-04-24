@@ -26,7 +26,7 @@ class loginController{
         $pwdResult=$this->loginService->checkPassword($username,$password);
         if($pwdResult["output"][0]=="true"){
             $pwdResult["output"]=true;
-            $home=getHomeDir($username);
+            $home=getHomeDirByUser($username);
             $pwdResult["home"]=$home;
             $pwdResult["name"]=$username;
             $_SESSION["user"]=$username;
