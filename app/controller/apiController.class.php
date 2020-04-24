@@ -2,14 +2,17 @@
 
 include_once ("./app/service/explorer/explorerService.php");
 include_once("./app/service/system/systemService.php");
+include_once("./app/service/login/loginService.class.php");
 
 class apiController{
 
     private $explorerService;
     private $systemService;
+    private $loginService;
     function __construct(){
         $this->explorerService=new explorerService();
         $this->systemService=new systemService();
+        $this->loginService=new loginService();
     }
 
     public function download(){
@@ -113,5 +116,35 @@ class apiController{
             echo json_encode($result);
         }
 
+    }
+
+    public function changePwd(){
+        $oldPwd=$_POST["oldPwd"];
+        $newPwd=$_POST["newPwd"];
+        $user=$_SESSION["user"];
+        $result=array();
+        if($user==""){
+            $result["message"]="用户未登录";
+            $result["type"]="error";
+        }
+        else{
+            $checkResult=$this->loginService->checkPassword($user,$oldPwd);
+            error_log($checkResult["staCode"]);
+            if($checkResult["staCode"]!="0" || $checkResult["output"][0]=="false"){
+                $result["message"]="旧密码错误";
+                $result["type"]="error";
+            }
+            else{
+                if($this->systemService->changePwd($user,$newPwd)){
+                    $result["message"]="修改成功！";
+                    $result["type"]="success";
+                }
+                else{
+                    $result["message"]="修改出错，请稍后再试.";
+                    $result["type"]="error";
+                }
+            }
+        }
+        echo json_encode($result);
     }
 }

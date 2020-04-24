@@ -2,7 +2,8 @@
 
 include ("./utils/commandUtils.php");
 include_once("./app/service/system/systemService.php");
+include_once("./app/service/login/loginService.class.php");
 
-$sysService=new systemService();
+$loginService=new loginService();
 
-print_r($sysService->diskInfo());
+print_r($loginService->checkPassword("drcat","12374111"));

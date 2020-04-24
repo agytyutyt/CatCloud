@@ -21,9 +21,13 @@ class Command{
         return Array("staCode"=>$resultCod,"output"=>$output);
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return string
+     */
     static public function checkAccount($username,$password){
-        $path=realpath('./app/api')."/auth.out $username $password";
-        return $path;
+        return realpath('./app/api')."/auth.out $username $password";
     }
 
     static public function renameCommand($oldFullName,$newFullName,$isDir=true){
@@ -77,4 +81,7 @@ class Command{
         return "find $path -name $file";
     }
 
+    static public function chpasswd($user, $password){
+        return "echo '$user:$password' | sudo chpasswd";
+    }
 }

@@ -17,9 +17,9 @@ class systemService{
 //            $mountPoint=strtok(" ");
             $disk=array();
             $disk["fileSystem"]=strtok($checkResult[$i]," ");
-            $disk["block"]=strtok(" ");
-            $disk["used"]=strtok(" ");
-            $disk["available"]=strtok(" ");
+            $disk["block"]=formatSize((int)strtok(" "));
+            $disk["used"]=formatSize((int)strtok(" "));
+            $disk["available"]=formatSize((int)strtok(" "));
 //            $disk["usedPercent"]=strtok(strtok(" "),"%");
             $disk["usedPercent"]=strtok(" ");
             $disk["mountPoint"]=strtok(" ");
@@ -28,4 +28,16 @@ class systemService{
         }
         return $result;
     }
+
+    public function changePwd($user,$password){
+        $stm=Command::chpasswd($user,$password);
+        $result=Command::sudo($stm);
+        if($result["staCode"]==0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
