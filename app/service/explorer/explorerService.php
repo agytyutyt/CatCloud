@@ -19,11 +19,19 @@ class explorerService {
         $result=array();
         if ($dh = opendir($dirName)){
             while (($file = readdir($dh)) !== false){
+                $extension="";
+                if(stripos($file,".")==null){
+                    $extension=false;
+                }
+                else{
+                    $extension=substr($file,stripos($file,".")+1);
+                }
                 $temp=array(
                     "name"=>$file,
                     "isDir"=>!is_file($dirName."/".$file),
                     "mdfTime"=>filemtime($dirName."/".$file),
-                    "type"=>filetype($dirName."/".$file)
+                    "type"=>filetype($dirName."/".$file),
+                    "extension"=>$extension
                 );
                 if($temp["isDir"]==true) $temp["size"]=false;
                 else{
