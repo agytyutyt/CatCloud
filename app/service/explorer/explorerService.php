@@ -13,8 +13,21 @@ class explorerService {
 
     public function utils_getDir($dirName){
         if(!is_dir($dirName)){
-            throw new Exception("DirNotExist");
-            return;
+            $pos=strripos($dirName,"/");
+            if($pos==0||$pos==false){
+                throw new Exception("DirNotExist");
+                return;
+            }
+            else{
+                $sub_dir=substr($dirName,0,$pos);
+                if(!is_dir($sub_dir)){
+                    throw new Exception("DirNotExist");
+                    return;
+                }
+                else{
+                    $dirName=$sub_dir;
+                }
+            }
         }
         $result=array();
         if ($dh = opendir($dirName)){
