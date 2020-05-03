@@ -15,9 +15,16 @@ class explorerController{
     function getDir(){
         $dirName=$_GET["dirname"];
         //echo json_encode($this->explorerService->utils_getDir("$dirName"));
-        $dir=$this->explorerService->utils_getDir("$dirName");
-        sort($dir);
-        echo json_encode($dir);
+        try{
+            $dir=$this->explorerService->utils_getDir("$dirName");
+            sort($dir);
+            echo json_encode($dir);
+        }catch (Exception $e){
+           $error=$e->getMessage();
+           $result=array("error"=>$error);
+           echo json_encode($result);
+        }
+
 //        print_r($dir);
     }
 
