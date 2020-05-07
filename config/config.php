@@ -2,6 +2,10 @@
 define("nLine","<br>");
 define("ROOTDIR",$_SERVER['DOCUMENT_ROOT']);
 
+//$baseIP="47.100.46.252:7231";
+$baseIP="localhost:8080";
+$GLOBALS["baseIP"]=$baseIP;
+
 $web=$_SERVER["HTTP_ORIGIN"];
 
 include_once("utils/requestUtils.php");

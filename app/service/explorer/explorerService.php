@@ -56,9 +56,10 @@ class explorerService {
         else{
             //可在此添加加密信息或者计数信息，以限制文件的下载次数以及防止恶意下载。
             $result["code"]=0;
-            $result["msg"]="http://localhost:8080/api/download?file=$dir/$name";
+            $ip=$GLOBALS['baseIP'];
+            $result["msg"]="http://$ip/api/download?file=$dir/$name";
         }
-        error_log("explorerService===========".$result["msg"]);
+        error_log("Start to download: ".$result["msg"]);
         return $result;
     }
 
